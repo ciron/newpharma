@@ -28,3 +28,24 @@ Route::get('admin/home', 'AdminController@index');
 Route::get('admin','Admin\LoginController@showLoginForm')->name('admin.login');
 Route::post('admin','Admin\LoginController@Login');
 Route::get('admin/logout','AdminController@logout')->name('admin.logout');
+
+//******************************Category*********************
+Route::get('admin/category','admin\CategoryController@index')->name('admin.category');
+Route::post('admin/category-store','admin\CategoryController@store')->name('store.category');
+Route::get('admin/category/edit/{id}','admin\CategoryController@edit');
+Route::post('admin/category-update','admin\CategoryController@update')->name('update.category');
+Route::get('admin/category/delete/{id}','admin\CategoryController@destroy');
+Route::get('admin/category/inactive/{id}','admin\CategoryController@inactive');
+Route::get('admin/category/active/{id}','admin\CategoryController@active');
+
+//******************************Brand************************ */
+Route::get('admin/brand','Admin\BrandController@index')->name('admin.brand');
+Route::post('admin/brand-store','admin\BrandController@store')->name('store.brand');
+Route::get('admin/brand/edit/{id}','admin\BrandController@edit');
+Route::post('admin/brand-update','admin\BrandController@update')->name('update.brand');
+Route::get('admin/brand/delete/{id}','admin\BrandController@destroy');
+Route::get('admin/brand/inactive/{id}','admin\BrandController@inactive');
+Route::get('admin/brand/active/{id}','admin\BrandController@active');
+//*******************************Product********************* */
+Route::get('admin/product/add','Admin\ProductController@addproduct')->name('admin.addproduct');
+
