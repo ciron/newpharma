@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
+use Symfony\Component\Routing\RouterInterface;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +23,6 @@ Route::get('/','FrontendController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('admin/home', 'AdminController@index');
 Route::get('admin','Admin\LoginController@showLoginForm')->name('admin.login');
 Route::post('admin','Admin\LoginController@Login');
@@ -48,4 +47,10 @@ Route::get('admin/brand/inactive/{id}','admin\BrandController@inactive');
 Route::get('admin/brand/active/{id}','admin\BrandController@active');
 //*******************************Product********************* */
 Route::get('admin/product/add','Admin\ProductController@addproduct')->name('admin.addproduct');
+Route::post('admin/product/store','admin\ProductController@store')->name('store.product');
+Route::get('admin/product/show','admin\ProductController@show')->name('show.product');
+
+Route::get('admin/product/delete/{id}','admin\ProductController@destroy');
+Route::get('admin/product/inactive/{id}','admin\ProductController@inactive');
+Route::get('admin/product/active/{id}','admin\ProductController@active');
 
