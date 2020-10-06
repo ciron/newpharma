@@ -10,9 +10,9 @@
             <div class="card pd-20 pd-sm-40">
                 <div class="table-wrapper">
                   <table id="datatable1" class="table display responsive nowrap">
-                    {{-- @if(session('brandupdate'))
+                    @if(session('medupdate'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{session('brandupdate')}}</strong>
+                    <strong>{{session('medupdate')}}</strong>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -42,7 +42,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                 @endif --}}
+                 @endif
                     <thead>
                       <tr>
                         <th>Serial</th>
@@ -79,7 +79,7 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ url('admin/brand/edit/' .$product->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                            <a href="{{ url('admin/product/edit/' .$product->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                             <a href="{{ url('admin/product/delete/' .$product->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                             @if ($product->status==1)
                             <a href="{{ url('admin/product/inactive/' .$product->id) }}" class="btn btn-danger"><i class="fa fa-arrow-down"></i></a>
