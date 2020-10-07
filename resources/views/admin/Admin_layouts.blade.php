@@ -79,6 +79,12 @@
               <span class="menu-item-label">Brand</span>
             </div><!-- menu-item -->
           </a><!-- sl-menu-link -->
+          <a href="{{ route('admin.coupon') }}" class="sl-menu-link  @yield('coupon')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-grid tx-22"></i>
+              <span class="menu-item-label">Coupon</span>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
         <a href="#" class="sl-menu-link @yield('product')">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>

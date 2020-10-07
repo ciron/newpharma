@@ -55,4 +55,12 @@ Route::get('admin/product/delete/{id}','admin\ProductController@destroy');
 Route::get('admin/product/inactive/{id}','admin\ProductController@inactive');
 Route::post('admin/product/update/image','admin\ProductController@updateimage')->name('update.image');
 Route::get('admin/product/active/{id}','admin\ProductController@active');
+//******************************Coupon*********************
+Route::get('admin/coupon','admin\CouponController@index')->name('admin.coupon');
+Route::post('admin/coupon-store','admin\CouponController@store')->name('store.coupon');
+Route::get('admin/coupon/edit/{id}','admin\CouponController@edit');
+Route::post('admin/coupon-update','admin\CouponController@update')->name('update.coupon');
+Route::get('admin/coupon/delete/{id}','admin\CouponController@destroy');
+Route::get('admin/coupon/inactive/{id}','admin\CouponController@inactive');
+Route::get('admin/coupon/active/{id}','admin\CouponController@active');
 

@@ -321,11 +321,6 @@ class ProductController extends Controller
      }
 
 
-
-
-
-
-
     }
 
 
@@ -338,7 +333,15 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        Product::find($id)->delete();
+        $allProduct =Product::findOrFail($id);
+        $img_one = $allProduct->image_one;
+        $img_two = $allProduct->image_two;
+        $img_three = $allProduct->image_three;
+
+        unlink($img_one);
+        unlink($img_two);
+        unlink($img_three);
+        Product::findOrFail($id)->delete();
         return redirect()->back()->with('delete', 'Medicine Deleted Successfully');
     }
     public function inactive($id)
