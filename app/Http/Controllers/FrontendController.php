@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Frontend;
+use App\Product;
+use App\Category;
 use Facade\FlareClient\View;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,9 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        return View('pages.index');
+        $products = Product::where('status',1)->latest()->get();
+        $Categories = Category::where('status',1)->latest()->get();
+        return View('pages.index',compact('products','Categories'));
     }
 
     /**
