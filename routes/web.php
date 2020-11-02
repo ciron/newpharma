@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 use Symfony\Component\Routing\RouterInterface;
 
 /*
@@ -64,3 +65,17 @@ Route::get('admin/coupon/delete/{id}','admin\CouponController@destroy');
 Route::get('admin/coupon/inactive/{id}','admin\CouponController@inactive');
 Route::get('admin/coupon/active/{id}','admin\CouponController@active');
 
+//*************************************************preview******************
+Route::get('product/details','FrontendController@details');
+// Route::post('Cart/Add/{product->id}','FrontendController@create')->name('addtocart');
+
+
+
+
+
+
+
+//***************************cart*******************************************
+// Route::any('Cart/Add/{product->id}','frontend\CartController@stores')->name('addtocart');
+Route::resource('Cart', 'frontend\CartController');
+// Route::post('cart/quantity/{id}','frontend\CartController@updatedquantity')->name('update.quantity');

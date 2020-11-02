@@ -28,7 +28,14 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-
+    @php
+        $total = App\cart::all()->where('user_ip',request()->ip())->sum(function ($t){
+            return $t->qty*$t->price;
+        })
+    @endphp
+    @php
+        $quantity = App\cart::all()->where('user_ip',request()->ip())->sum('qty')
+    @endphp
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
@@ -38,9 +45,9 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="{{ route('Cart.index') }}"><i class="fa fa-shopping-bag"></i> <span>{{ $quantity }}</span></a></li>
             </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            <div class="header__cart__price">item: <span>৳{{ $total }}</span></div>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -58,7 +65,7 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
+                <li class="active"><a href="{{ url('/') }}">Home</a></li>
                 <li><a href="./shop-grid.html">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
@@ -81,8 +88,8 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
+                <li><i class="fa fa-envelope"></i> chiron.cse1998@gmail.com</li>
+                <li>Free Shipping for all Order of ৳99</li>
             </ul>
         </div>
     </div>
@@ -127,10 +134,18 @@
             </div>
         </div>
         <div class="container">
+            @if(session('cartadd'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{session('cartadd')}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                   @endif
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="{{ asset('frontend') }}/img/logo2.png" alt="" width="100px;" height="50px;" ></a>
+                        <a href="{{ url('/') }}"><img src="{{ asset('frontend') }}/img/logo2.png" alt="" width="100px;" height="50px;" ></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -153,11 +168,12 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="header__cart">
+
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="{{ route('Cart.index') }}"><i class="fa fa-shopping-bag"></i> <span>{{ $quantity }}</span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">item: <span>৳{{ $total }}</span></div>
                     </div>
                 </div>
             </div>
@@ -167,48 +183,7 @@
         </div>
     </header>
     <!-- Header Section End -->
-       <!-- Hero Section Begin -->
-       <section class="hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>All Category</span>
-                        </div>
-                        @php
-                            $categories = App\Category::where('status',1)->latest()->get();
-                        @endphp
-                        <ul>
-                            @foreach ($categories as $category)
-                            <li><a href="#">{{ $category->category_name }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
-                            </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
-                            </div>
-                        </div>
-                    </div>
+
 
 @yield('Frontend_master')
 
@@ -219,12 +194,12 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="{{ asset('frontend') }}/img/logo.png" alt=""></a>
+                            <a href="{{ url('/') }}"><img src="{{ asset('frontend') }}/img/logo.png" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
+                            <li>Address: mirpur,11.5</li>
+                            <li>Phone:01868190622</li>
+                            <li>Email: chiron.cse1998@gmail.com</li>
                         </ul>
                     </div>
                 </div>
@@ -269,9 +244,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="footer__copyright">
-                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+                        <div class="footer__copyright__text"><p>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Chironjit Roy <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://www.bubt.edu.bd/" target="_blank">(BUBT)</a>
+ </p></div>
                         <div class="footer__copyright__payment"><img src="{{ asset('frontend') }}/img/payment-item.png" alt=""></div>
                     </div>
                 </div>
@@ -289,9 +264,6 @@
     <script src="{{ asset('frontend') }}/js/mixitup.min.js"></script>
     <script src="{{ asset('frontend') }}/js/owl.carousel.min.js"></script>
     <script src="{{ asset('frontend') }}/js/main.js"></script>
-
-
-
 </body>
 
 </html>
