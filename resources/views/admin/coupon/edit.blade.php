@@ -19,6 +19,12 @@
                             <span class="text-danger">{{$message}}</span>
                             @enderror
                             </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control  @error('coupon_discount')is-invalid @enderror" name="coupon_discount" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $coupon->coupon_discount }}">
+                                @error('coupon_discount')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
+                                </div>
 
                             <button type="submit" class="btn btn-primary">Update</button>
                     </form>

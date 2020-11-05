@@ -46,6 +46,7 @@
                       <tr>
                         <th>Serial</th>
                         <th>Coupon Name</th>
+                        <th>Coupon discount</th>
                         <th>Status</th>
                         <th>Action</th>
                       </tr>
@@ -58,6 +59,7 @@
                       <tr>
                         <td>{{ $i++ }}</td>
                         <td>{{ $coupon->coupon_name }}</td>
+                        <td>{{ $coupon->coupon_discount }}%</td>
                         <td>
                             @if ($coupon->status==1)
                             <span class="badge badge-success">Active</span>
@@ -104,6 +106,12 @@
                             <span class="text-danger">{{$message}}</span>
                             @enderror
                             </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control  @error('coupon_discount')is-invalid @enderror" name="coupon_discount" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Coupon discount..">
+                                @error('coupon_discount')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
+                                </div>
 
                             <button type="submit" class="btn btn-primary">Add</button>
                     </form>

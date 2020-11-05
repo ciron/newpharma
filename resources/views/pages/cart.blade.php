@@ -144,28 +144,40 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                            Upadate Cart</a>
+                        <a href="{{ url('/') }}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+
                     </div>
                 </div>
                 <div class="col-lg-6">
+                    {{-- @if (Session::has('coupon')) --}}
+
+                    {{-- @else --}}
                     <div class="shoping__continue">
                         <div class="shoping__discount">
                             <h5>Discount Codes</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Enter your coupon code">
+                            <form action="{{ route('aplycupon') }}" method="POST">
+                                @method('post')
+                                @csrf
+                                <input type="text" name="coupon_name" placeholder="Enter your coupon code">
                                 <button type="submit" class="site-btn">APPLY COUPON</button>
                             </form>
                         </div>
                     </div>
+                    {{-- @endif --}}
                 </div>
                 <div class="col-lg-6">
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
+
+                            @if (Session::has('coupon'))
+                            <li>Subtotal <span>{{ $subtotal }}৳</span></li>
+                            <li>Discount <span>{{ Session()->get('coupon')['coupon_discount'] }}%({{ $discount=$subtotal*Session()->get('coupon')['coupon_discount'] /100 }}৳)</span></li>
+                            <li>Total <span>{{ $subtotal - $discount }} ৳</span></li>
+                            @else
                             <li>Subtotal <span>৳{{ $subtotal }}</span></li>
-                            <li>Total <span>$454.98</span></li>
+                            @endif
+
                         </ul>
                         <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>

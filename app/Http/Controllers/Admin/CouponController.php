@@ -45,14 +45,17 @@ class CouponController extends Controller
     {
         $request->validate([
             'coupon_name' => 'required|unique:coupons,coupon_name',
+            'coupon_discount' => 'required',
 
         ],
         [
             'coupon_name.required' => 'Please fillup this filed',
+            'coupon_discount.required' => 'Please fillup discount filed',
         ]
         );
         Coupon::insert([
             'coupon_name' => $request->coupon_name,
+            'coupon_discount' => $request->coupon_discount,
             'created_at' => Carbon::now(),
         ]);
         return redirect()->back()->with('message','Coupon Added Successfully');
@@ -92,15 +95,18 @@ class CouponController extends Controller
     {
         $request->validate([
             'coupon_name' => 'required|unique:coupons,coupon_name',
+            'coupon_discount' => 'required',
 
         ],
         [
             'coupon_name.required' => 'Please fillup this filedssss',
+            'coupon_discount.required' => 'Please fillup discount filed',
         ]
         );
         $coupon_id = $request->id;
         Coupon::find($coupon_id)->update([
             'coupon_name' => $request->coupon_name,
+            'coupon_discount' => $request->coupon_discount,
             'updated_at' => Carbon::now(),
         ]);
         return redirect()->Route('admin.coupon')->with('coupupdate','Coupon Updated Successfully');

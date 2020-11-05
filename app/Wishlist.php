@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Coupon extends Model
+class Wishlist extends Model
 {
     protected $fillable = [
-        'coupon_name', 'coupon_discount','status',
+        'user_id', 'product_id', 'quantity',
     ];
 }

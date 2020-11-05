@@ -70,12 +70,15 @@ Route::get('product/details','FrontendController@details');
 // Route::post('Cart/Add/{product->id}','FrontendController@create')->name('addtocart');
 
 
-
-
+// Route::get('wishlist/','frontend\WishlistController@index')->name('wishlist.view');
+Route::get('wishlist/add/{product_id}','frontend\WishlistController@create')->name('wishlist.create');
 
 
 
 //***************************cart*******************************************
 // Route::any('Cart/Add/{product->id}','frontend\CartController@stores')->name('addtocart');
+Route::post('Cart/coupon','frontend\CartController@aplycoupon')->name('aplycupon');
 Route::resource('Cart', 'frontend\CartController');
 // Route::post('cart/quantity/{id}','frontend\CartController@updatedquantity')->name('update.quantity');
+
+

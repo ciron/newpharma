@@ -78,6 +78,22 @@
     <!-- Featured Section Begin -->
     <section class="featured spad">
         <div class="container">
+            @if(session('wishadd'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{session('wishadd')}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+           @endif
+           @if(session('wishalredy'))
+           <div class="alert alert-danger alert-dismissible fade show" role="alert">
+           <strong>{{session('wishalredy')}}</strong>
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+          @endif
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
@@ -103,7 +119,7 @@
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="{{ asset($product->image_one) }}">
                             <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="{{ route('wishlist.create',$product->id) }}"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                 <li>
                                     <form action="{{ route('Cart.store',$product->id)}}" method="POST">
