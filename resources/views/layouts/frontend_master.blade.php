@@ -34,7 +34,11 @@
         })
     @endphp
     @php
-        $quantity = App\cart::all()->where('user_ip',request()->ip())->sum('qty')
+        $quantity = App\cart::all()->where('user_ip',request()->ip())->sum('qty');
+
+    @endphp
+    @php
+         $wishquantity = App\Wishlist::all()->where('user_id',Auth::id())->sum('quantity');
     @endphp
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -44,7 +48,7 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <li><a href="#"><i class="fa fa-heart"></i> <span>{{ $wishquantity }}</span></a></li>
                 <li><a href="{{ route('Cart.index') }}"><i class="fa fa-shopping-bag"></i> <span>{{ $quantity }}</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>৳{{ $total }}</span></div>
@@ -195,6 +199,7 @@
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="{{ route('Cart.index') }}">Shoping Cart</a></li>
+                                    <li><a href="{{ route('wish.index') }}">Wishlist</a></li>
                                     <li><a href="./checkout.html">Check Out</a></li>
                                 </ul>
                             </li>
@@ -207,7 +212,7 @@
                     <div class="header__cart">
 
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            <li><a href="{{ route('wish.index') }}"><i class="fa fa-heart"></i> <span>{{ $wishquantity }}</span></a></li>
                             <li><a href="{{ route('Cart.index') }}"><i class="fa fa-shopping-bag"></i> <span>{{ $quantity }}</span></a></li>
                         </ul>
                         <div class="header__cart__price">item: <span>৳{{ $total }}</span></div>

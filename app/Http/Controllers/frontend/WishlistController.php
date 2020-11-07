@@ -16,7 +16,8 @@ class WishlistController extends Controller
      */
     public function index()
     {
-
+        $wishlists = Wishlist::where('user_id',Auth::id())->Latest()->get();
+        return view('pages.wish',compact('wishlists'));
     }
 
     /**
@@ -62,9 +63,24 @@ class WishlistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($product_id)
     {
-        //
+        if(Auth::check()){
+            $check=Wishlist::where('product_id',$product_id)->where('user_id',Auth::id())->where('quantity',1)->first();
+            if($check){
+                return redirect()->back()->with('wishalredy','Product Already Added into Wishlist');
+            }else{
+                Wishlist::insert([
+                    'user_id' => Auth::id(),
+                    'product_id' =>$product_id,
+                    'quantity' => 1,
+                ]);
+                return redirect()->back()->with('wishadd','Product Added into Wishlist');
+            }
+
+        }else{
+            return redirect()->route('login')->with('wishlogin','At first login your account');
+        }
     }
 
     /**
@@ -98,6 +114,7 @@ class WishlistController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Wishlist::find($id)->delete();
+        return redirect()->back()->with('delete','Wishlist remove Successfully');
     }
 }

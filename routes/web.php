@@ -66,19 +66,19 @@ Route::get('admin/coupon/inactive/{id}','admin\CouponController@inactive');
 Route::get('admin/coupon/active/{id}','admin\CouponController@active');
 
 //*************************************************preview******************
-Route::get('product/details','FrontendController@details');
-// Route::post('Cart/Add/{product->id}','FrontendController@create')->name('addtocart');
+Route::get('product/details/{id}','FrontendController@details')->name('product.details');
+Route::post('product/added','FrontendController@store')->name('product.cart');
 
+Route::get('review/add/{id}','FrontendController@storing')->name('review.add');
 
-// Route::get('wishlist/','frontend\WishlistController@index')->name('wishlist.view');
+//  ************************wishlist*************************
 Route::get('wishlist/add/{product_id}','frontend\WishlistController@create')->name('wishlist.create');
-
-
+Route::get('wishlist/all','frontend\WishlistController@index')->name('wish.index');
+Route::get('wish/destroy/{id}','frontend\WishlistController@destroy')->name('wishlist.delete');
 
 //***************************cart*******************************************
-// Route::any('Cart/Add/{product->id}','frontend\CartController@stores')->name('addtocart');
 Route::post('Cart/coupon','frontend\CartController@aplycoupon')->name('aplycupon');
 Route::resource('Cart', 'frontend\CartController');
-// Route::post('cart/quantity/{id}','frontend\CartController@updatedquantity')->name('update.quantity');
+
 
 

@@ -94,6 +94,14 @@
                </button>
              </div>
           @endif
+          @if(session('success'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>{{session('success')}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+         @endif
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
@@ -132,7 +140,7 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="{{url('product/details/.')}}">{{ $product->product_name }}</a></h6>
+                            <h6><a href="{{route('product.details',$product->id)}}">{{ $product->product_name }}</a></h6>
                             <h5>৳{{ $product->price }}</h5>
                         </div>
                     </div>
