@@ -97,6 +97,19 @@
           <li class="nav-item"><a href="{{ route('show.product') }}" class="nav-link @yield('manageproduct')">Manage Medicine</a></li>
 
         </ul>
+        <a href="#" class="sl-menu-link @yield('order')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+              <span class="menu-item-label">Order</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+          <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href="{{ route('order.index') }}" class="nav-link @yield('manageorder')">All Order</a></li>
+            <li class="nav-item"><a href="{{ route('order.pending') }}" class="nav-link @yield('pendingorder')">Pending order</a></li>
+
+          </ul>
+
 
       </div><!-- sl-sideleft-menu -->
 
@@ -114,7 +127,7 @@
         <nav class="nav">
           <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name">{{ Auth::user()->name }}<span class="hidden-md-down"></span></span>
+              {{-- <span class="logged-name">{{ Auth::user()->name }}<span class="hidden-md-down"></span></span> --}}
               <img src="{{ asset('backend') }}/img/img3.jpg" class="wd-32 rounded-circle" alt="">
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Review;
+use App\Product;
+
 use Illuminate\Support\Facades\Auth;
 class ReviewController extends Controller
 {
@@ -25,7 +27,8 @@ class ReviewController extends Controller
      */
     public function create()
     {
-
+        $rating=Review::where('product_id',7)->where('user_id',Auth::id())->count('rating')->latest();
+        dd($rating);
     }
 
     /**

@@ -29,8 +29,13 @@ class Product extends Model
     public function brand(){
         return $this->belongsTo(Brand::class,'brand_id');
     }
-    
-    // public function cart(){
-    //     return $this->hasMany(cart::class,'cart');
+
+    public function review(){
+        return $this->hasMany(Review::class);
+    }
+    // public function ratingcount(){
+    //    $starc=$this->review()->sum('rating');
+    //    $avg=$starc/5;
+    //    return $avg;
     // }
 }

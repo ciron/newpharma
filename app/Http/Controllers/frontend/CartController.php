@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\cart;
 use App\Coupon;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Carbon;
 class CartController extends Controller
 {
 
@@ -16,6 +16,7 @@ class CartController extends Controller
         $subtotal = cart::all()->where('user_ip',request()->ip())->sum(function ($t){
             return $t->qty*$t->price;
         });
+        // dd($carts);
         return view('pages.cart',compact('carts','subtotal'));
     }
 
@@ -30,7 +31,8 @@ class CartController extends Controller
                 'product_id'=>$request->product_id,
                 'qty'=>1,
                 'price'=>$request->price,
-                'user_ip'=>request()->ip()
+                'user_ip'=>request()->ip(),
+                'created_at'=>Carbon::now(),
             ]);
             return redirect()->back()->with('cartadd','Product Added into cart');
         }

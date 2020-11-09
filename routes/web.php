@@ -20,7 +20,7 @@ use Symfony\Component\Routing\RouterInterface;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/','FrontendController@index');
+Route::get('/','FrontendController@index')->name('user.dashbord');
 
 Auth::routes();
 
@@ -46,6 +46,13 @@ Route::post('admin/brand-update','admin\BrandController@update')->name('update.b
 Route::get('admin/brand/delete/{id}','admin\BrandController@destroy');
 Route::get('admin/brand/inactive/{id}','admin\BrandController@inactive');
 Route::get('admin/brand/active/{id}','admin\BrandController@active');
+
+// **************************order of admin******************
+Route::get('admin/order/all','admin\OrderController@index')->name('order.index');
+Route::get('admin/order/pending','admin\OrderController@indexpending')->name('order.pending');
+Route::get('admin/order/{id}','admin\OrderController@aprove')->name('shift.order');
+
+
 //*******************************Product********************* */
 Route::get('admin/product/add','Admin\ProductController@addproduct')->name('admin.addproduct');
 Route::post('admin/product/store','admin\ProductController@store')->name('store.product');
@@ -67,14 +74,22 @@ Route::get('admin/coupon/active/{id}','admin\CouponController@active');
 
 //*************************************************preview******************
 Route::get('product/details/{id}','FrontendController@details')->name('product.details');
-Route::post('product/added','FrontendController@store')->name('product.cart');
+Route::post('product/added/{id}','FrontendController@store')->name('product.cart');
 
 Route::get('review/add/{id}','FrontendController@storing')->name('review.add');
+// Route::get('review/add/{id}','FrontendController@review')->name('review.add');
+// Route::get('/rating','ReviewController@create');
+
+
 
 //  ************************wishlist*************************
 Route::get('wishlist/add/{product_id}','frontend\WishlistController@create')->name('wishlist.create');
 Route::get('wishlist/all','frontend\WishlistController@index')->name('wish.index');
 Route::get('wish/destroy/{id}','frontend\WishlistController@destroy')->name('wishlist.delete');
+
+Route::get('checkout','OrderController@index')->name('checkout.index');
+Route::get('order/details','OrderController@show')->name('order.product');
+Route::get('checkout/create','OrderController@store')->name('checkout.ad');
 
 //***************************cart*******************************************
 Route::post('Cart/coupon','frontend\CartController@aplycoupon')->name('aplycupon');

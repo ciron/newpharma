@@ -48,7 +48,9 @@
     </div>
 </section>
 <!-- Hero Section End -->
-
+{{-- @php
+    $check=App\Review::where('product_id',$product_id)->get();
+@endphp --}}
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="{{ asset('frontend') }}/img/pbnr.jpg">
     <div class="container">
@@ -72,7 +74,7 @@
 <section class="product-details spad">
     <div class="container">
         @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>{{session('success')}}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -115,13 +117,30 @@
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__text">
                     <h3>{{ $product->product_name }}</h3>
+
                     <div class="product__details__rating">
+                        @if ( $product->rating==5)
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star-half-o"></i>
-                        <span>({{ $review->rating }} reviews)</span>
+                        @elseif($product->rating==4)
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        @elseif($product->rating==3)
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        @elseif($product->rating==2)
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        @else
+                        <i class="fa fa-star"></i>
+                        @endif
+
                     </div>
                     <div class="product__details__price">৳{{ $product->price }}</div>
                     <p>{!! $product->short_description !!}</p>
@@ -132,7 +151,7 @@
                                 <div class="pro-qty">
                                     <input type="number" name="qty" value="1" min="1">
                                     <input type="hidden" name="price" value="{{ $product->price}}">
-                                    <input type="hidden" name="product_id" value="{{ $product->id}}">
+                                    <input type="hidden" name="product_id" value="{{ $product->product_id}}">
                                 </div>
                                 <button type="submit" class="primary-btn">ADD TO CARD</button>
                             </form>
@@ -145,6 +164,7 @@
                   <a href="{{ route('wishlist.create',$product->id) }}" class="heart-icon" style="color: red;"><span class="icon_heart_alt"></span></a>
                   @endif
                     {{-- <a href="#" class="heart-icon" style="color: red;"><span class="icon_heart_alt"></span></a> --}}
+
                     <ul>
                         <li><b>Availability</b> <span>
                             @if ($product->product_quantity>=4)
@@ -200,10 +220,14 @@
                             </div>
                         </div> --}}
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
+
+
+
                             <div class="product__details__tab__desc">
                                 <h6>{{ $product->product_name }} Information</h6>
-                                <p>{!! $review->cus_review  !!}</p>
+                                <p>{!! $product->cus_review  !!}</p>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -274,7 +298,7 @@
                         </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6><a href="#">{{ $product->product_name }}</a></h6>
+                        <h6><a href="{{route('product.details',$product->id)}}">{{ $product->product_name }}</a></h6>
                         <h5>৳{{ $product->price }}</h5>
                     </div>
                 </div>

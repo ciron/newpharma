@@ -11,6 +11,7 @@ use Facade\FlareClient\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use DB;
 
 class FrontendController extends Controller
 {
@@ -36,20 +37,33 @@ class FrontendController extends Controller
 
      public function details($product_id)
      {
-        // $proAvail =Product::where('product_id',$product_id)->where('product_quantity',$product_quantity)->get();
-        // if ($proAvail >=1)
-        // {
-        //    return $product_quantity;
-        // }else{
-        //     echo 'out of stock';
-        // }
-        // $cart = cart::latest()->where('user_ip',request()->ip())->where('product_id',$product_id)->get();
-        $review= Review::all()->where('product_id',$product_id)->first();
-         $product =Product::find($product_id);
+
+        $product=DB::table('products')
+                    ->join('reviews','reviews.product_id','=','products.id')
+                    ->join('categories','categories.id','=','products.category_id')
+                    ->select('products.*','categories.*','reviews.*')
+                    ->where('products.id',$product_id)
+                    ->first();
          $category_id=$product->category_id;
          $related_pro=Product::where('category_id',$category_id)->where('id','!=',$product_id)->latest()->get();
 
-         return view('pages.preview',compact('product','related_pro','review'));
+         return view('pages.preview',compact('product','related_pro'));
+     }
+     public function review($product_id)
+     {
+
+        $product=DB::table('products')
+                    ->join('reviews','reviews.product_id','=','products.id')
+                    ->select('reviews.*')
+                    ->where('products.id',$product_id)
+                    ->get();
+
+        dd($product);
+        // $produc =Product::find($product_id);,'reviews.*'
+        //  $category_id=$product->category_id;
+        //  $related_pro=Product::where('category_id',$category_id)->where('id','!=',$product_id)->latest()->get();
+
+        //  return view('pages.preview',compact('product'));
      }
     public function create(Request $request,$product_id)
     {
@@ -66,17 +80,18 @@ class FrontendController extends Controller
     {
         $check=cart::where('product_id',$request->product_id)->where('user_ip',request()->ip())->first();
         if($check){
-            cart::where('product_id',$request->product_id)->where('user_ip',request()->ip())->update([
-                'qty'=> $request->qty,
-            ]);
-            return redirect()->back()->with('success','Product update into cart');
+            // cart::where('product_id',$request->product_id)->where('user_ip',request()->ip())->update([
+            //     'qty'=> $request->qty,
+            // ]);
+            return redirect()->back()->with('success','Product Already added into cart');
         }else{
-            cart::insert([
+         $carti=cart::insert([
                 'product_id'=>$request->product_id,
                 'qty'=>$request->qty,
                 'price'=>$request->price,
                 'user_ip'=>request()->ip()
             ]);
+            // dd($carti);
             return redirect()->back()->with('cartadd','Product Added into cart');
         }
     }
