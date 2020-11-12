@@ -115,30 +115,42 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
+                @php
+                    $rating=App\Review::where('product_id',$product->product_id)->get();
+                    $pp=$rating->sum('rating');
+                    $aa=$rating->count('product_id');
+                    $average=$pp/$aa;
+                    $int_cast = (int)$average;
+                    // echo $int_cast;
+                    // echo $pp;
+                    // echo $aa;
+                    // echo $rating;
+                @endphp
                 <div class="product__details__text">
                     <h3>{{ $product->product_name }}</h3>
-
                     <div class="product__details__rating">
-                        @if ( $product->rating==5)
+                        @if ( $int_cast >= 5)
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
-                        @elseif($product->rating==4)
+                        <i class="fa fa-star"></i>
+                        @elseif( $int_cast == 4)
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
-                        @elseif($product->rating==3)
+                        @elseif( $int_cast == 3)
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
-                        @elseif($product->rating==2)
+                        @elseif( $int_cast == 2)
                         <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        @elseif( $int_cast == 1)
                         <i class="fa fa-star"></i>
                         @else
-                        <i class="fa fa-star"></i>
+                                <h4>nothing</h4>
                         @endif
 
                     </div>
@@ -224,8 +236,11 @@
 
 
                             <div class="product__details__tab__desc">
-                                <h6>{{ $product->product_name }} Information</h6>
-                                <p>{!! $product->cus_review  !!}</p>
+                                <h6>{{ $product->product_name }} Customer Reviews</h6>
+                                @foreach ($products as $prod)
+                                <h6>{{ $prod->name }}</h6>
+                                <p>{!! $prod->cus_review  !!}</p>
+                                @endforeach
                             </div>
 
                         </div>
@@ -243,9 +258,9 @@
                 <div class="section-title related__product__title">
                     <h2> Product Review </h2>
                 </div>
-                <form action="{{ route('review.add',$product->id) }}" method="any">
+                <form action="{{ route('review.add',$product->product_id) }}" method="any">
                     <div class="form-group">
-                        <input type="hidden" name="product_id" value="{{ $product->id  }}">
+                        <input type="hidden" name="product_id" value="{{ $product->product_id  }}">
                         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                         <label class="form-control-label">Customer Review: <span class="tx-danger"></span></label><br>
                         <textarea style="width: 100%" id="summernote"class="@error('cus_review')is-invalid @enderror" name="cus_review"></textarea>

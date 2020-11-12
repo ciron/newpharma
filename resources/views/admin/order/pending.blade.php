@@ -92,7 +92,12 @@
                            </td>
                            <td class="shoping__cart__total">
                                <h5>
-                                <a href="{{ route('shift.order',$row->id) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                                    <form action="{{ route('shift.order',$row->order_id) }}" method="POST" style="display: inline;" >
+                                        @csrf
+                                        @method('put')
+
+                                        <button class="btn btn-success"><i class="fa fa-pencil"></i></button>
+                                    </form>
                                 <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                 <a href="" class="btn btn-success"><i class="fa fa-eye"></i></a>
 

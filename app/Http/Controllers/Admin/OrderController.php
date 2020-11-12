@@ -51,19 +51,18 @@ class OrderController extends Controller
         //
     }
 
-    public function aprove(Request $request,$id)
+    public function aprove($order_id)
     {
-        $check=Order::all()->where('id',$id)->where('status',0)->first();
-        return $check;
+        $check=Order::all()->where('id',$order_id)->where('status',0)->first();
 
-        // if($check){
-        //     Order::where('id',$request->id)->increment('status');
-        //     dd($check);
-        //     // return redirect()->back()->with('sucsess','Shifted');
-        // }else{
-        //     dd($check);
-        //     // return redirect()->back()->with('sucsess','failed');
-        // }
+        if($check){
+            Order::where('id',$order_id)->increment('status');
+
+            return redirect()->back()->with('sucsess','Shifted');
+        }else{
+
+            return redirect()->back()->with('sucsess','failed');
+        }
     }
 
     /**

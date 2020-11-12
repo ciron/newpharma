@@ -12,18 +12,18 @@
               <a href="" class="tx-white-8 hover-white"><i class="icon ion-android-more-horizontal"></i></a>
             </div><!-- card-header -->
             <div class="d-flex align-items-center justify-content-between">
-              <span class="sparkline2">5,3,9,6,5,9,7,3,5,2</span>
-              <h3 class="mg-b-0 tx-white tx-lato tx-bold">$850</h3>
+              <span class="sparkline2">8,3,9,6,5,9,7,3,5,2</span>
+              <h3 class="mg-b-0 tx-white tx-lato tx-bold">{{ $tota }}</h3>
             </div><!-- card-body -->
             <div class="d-flex align-items-center justify-content-between mg-t-15 bd-t bd-white-2 pd-t-10">
               <div>
-                <span class="tx-11 tx-white-6">Gross Sales</span>
-                <h6 class="tx-white mg-b-0">$2,210</h6>
+                <span class="tx-11 tx-white-6">Total Price</span>
+                <h6 class="tx-white mg-b-0">৳{{ $sum }}</h6>
               </div>
-              <div>
+              {{-- <div>
                 <span class="tx-11 tx-white-6">Tax Return</span>
                 <h6 class="tx-white mg-b-0">$320</h6>
-              </div>
+              </div> --}}
             </div><!-- -->
           </div><!-- card -->
         </div><!-- col-3 -->
@@ -35,17 +35,17 @@
             </div><!-- card-header -->
             <div class="d-flex align-items-center justify-content-between">
               <span class="sparkline2">5,3,9,6,5,9,7,3,5,2</span>
-              <h3 class="mg-b-0 tx-white tx-lato tx-bold">$4,625</h3>
+              <h3 class="mg-b-0 tx-white tx-lato tx-bold">{{ $total }}</h3>
             </div><!-- card-body -->
             <div class="d-flex align-items-center justify-content-between mg-t-15 bd-t bd-white-2 pd-t-10">
               <div>
-                <span class="tx-11 tx-white-6">Gross Sales</span>
-                <h6 class="tx-white mg-b-0">$2,210</h6>
+                <span class="tx-11 tx-white-6">Total Amount</span>
+                <h6 class="tx-white mg-b-0">৳{{ $sumatio }}</h6>
               </div>
-              <div>
+              {{-- <div>
                 <span class="tx-11 tx-white-6">Tax Return</span>
                 <h6 class="tx-white mg-b-0">$320</h6>
-              </div>
+              </div> --}}
             </div><!-- -->
           </div><!-- card -->
         </div><!-- col-3 -->
@@ -57,17 +57,17 @@
             </div><!-- card-header -->
             <div class="d-flex align-items-center justify-content-between">
               <span class="sparkline2">5,3,9,6,5,9,7,3,5,2</span>
-              <h3 class="mg-b-0 tx-white tx-lato tx-bold">$11,908</h3>
+              <h3 class="mg-b-0 tx-white tx-lato tx-bold">{{ $wetotall }}</h3>
             </div><!-- card-body -->
             <div class="d-flex align-items-center justify-content-between mg-t-15 bd-t bd-white-2 pd-t-10">
               <div>
                 <span class="tx-11 tx-white-6">Gross Sales</span>
-                <h6 class="tx-white mg-b-0">$2,210</h6>
+                <h6 class="tx-white mg-b-0">৳{{ $wesum }}</h6>
               </div>
-              <div>
+              {{-- <div>
                 <span class="tx-11 tx-white-6">Tax Return</span>
                 <h6 class="tx-white mg-b-0">$320</h6>
-              </div>
+              </div> --}}
             </div><!-- -->
           </div><!-- card -->
         </div><!-- col-3 -->
@@ -79,17 +79,17 @@
             </div><!-- card-header -->
             <div class="d-flex align-items-center justify-content-between">
               <span class="sparkline2">5,3,9,6,5,9,7,3,5,2</span>
-              <h3 class="mg-b-0 tx-white tx-lato tx-bold">$91,239</h3>
+              <h3 class="mg-b-0 tx-white tx-lato tx-bold">{{ $yetotall }}</h3>
             </div><!-- card-body -->
             <div class="d-flex align-items-center justify-content-between mg-t-15 bd-t bd-white-2 pd-t-10">
               <div>
                 <span class="tx-11 tx-white-6">Gross Sales</span>
-                <h6 class="tx-white mg-b-0">$2,210</h6>
+                <h6 class="tx-white mg-b-0">৳{{ $yesum }}</h6>
               </div>
-              <div>
+              {{-- <div>
                 <span class="tx-11 tx-white-6">Tax Return</span>
                 <h6 class="tx-white mg-b-0">$320</h6>
-              </div>
+              </div> --}}
             </div><!-- -->
           </div><!-- card -->
         </div><!-- col-3 -->

@@ -44,10 +44,20 @@ class FrontendController extends Controller
                     ->select('products.*','categories.*','reviews.*')
                     ->where('products.id',$product_id)
                     ->first();
+        $products=DB::table('products')
+                    ->join('reviews','reviews.product_id','=','products.id')
+                    ->join('categories','categories.id','=','products.category_id')
+                    ->join('users','users.id','=','reviews.user_id')
+                    ->select('products.*','categories.*','reviews.*','users.*')
+                    ->where('products.id',$product_id)
+                    ->get();
+
+
+
          $category_id=$product->category_id;
          $related_pro=Product::where('category_id',$category_id)->where('id','!=',$product_id)->latest()->get();
 
-         return view('pages.preview',compact('product','related_pro'));
+         return view('pages.preview',compact('product','related_pro','products'));
      }
      public function review($product_id)
      {
@@ -57,6 +67,7 @@ class FrontendController extends Controller
                     ->select('reviews.*')
                     ->where('products.id',$product_id)
                     ->get();
+
 
         dd($product);
         // $produc =Product::find($product_id);,'reviews.*'
@@ -140,7 +151,7 @@ class FrontendController extends Controller
     {
         //
     }
-    public function storing(Request $request)
+    public function storing(Request $request,$product_id)
     {
         if(Auth::check()){
             $request->validate([
@@ -155,7 +166,7 @@ class FrontendController extends Controller
             );
             Review::insert([
                     'user_id' => Auth::id(),
-                    'product_id' =>$request->product_id,
+                    'product_id' =>$product_id,
                     'cus_review' =>$request->cus_review,
                     'rating' =>$request->rating,
                     'created_at' =>Carbon::now(),

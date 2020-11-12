@@ -50,7 +50,7 @@ Route::get('admin/brand/active/{id}','admin\BrandController@active');
 // **************************order of admin******************
 Route::get('admin/order/all','admin\OrderController@index')->name('order.index');
 Route::get('admin/order/pending','admin\OrderController@indexpending')->name('order.pending');
-Route::get('admin/order/{id}','admin\OrderController@aprove')->name('shift.order');
+Route::put('admin/order/{id}','admin\OrderController@aprove')->name('shift.order');
 
 
 //*******************************Product********************* */
